@@ -16,8 +16,12 @@ Node lives at `C:\Program Files\nodejs\` and is **not on PATH** in this environm
 $env:Path += ";C:\Program Files\nodejs"
 ```
 
+PowerShell ExecutionPolicy on this machine blocks `.ps1` scripts by default, which breaks `npm` (it's an npm.ps1 wrapper). Two workarounds:
+- **One-shot**: use `npm.cmd run dev` instead of `npm run dev` (bypasses the .ps1 wrapper).
+- **Session fix**: `Set-ExecutionPolicy -Scope Process -ExecutionPolicy Bypass` then `npm run dev` works for that shell.
+
 From `web/`:
-- `npm run dev` — Next.js dev server (Turbopack) on http://localhost:3000
+- `npm run dev` (or `npm.cmd run dev`) — Next.js dev server (Turbopack) on http://localhost:3000
 - `npm run build` — production build
 - `npm run lint` — ESLint
 
